@@ -1,0 +1,77 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-audio-player/paper-audio-player.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<dom-module id="sr-audio-play">
+    <template>
+        <style>
+            :host {
+                display: block;
+                height: 340px;
+                padding:15px;
+                @apply(--layout-horizontal);
+                @apply(--layout-center-justified);
+               
+            }
+            #wrapper{
+                 @apply(--layout-vertical);
+                max-width:1280px;
+                width:100%;
+                text-align:center;
+            }
+            #portada {
+                width: 199px;
+                height: 199px;  
+                margin: 5px auto;
+            } 
+            paper-audio-player {
+                max-width:1000px;
+                bottom:0px;
+                --paper-audio-player-color: var(--app-primary-color);
+                
+            }
+            #botones{
+                @apply(--layout-horizontal);
+                @apply(--layout-center-justified);
+                padding: 10px 0 10px 0;
+                position:relative;
+                
+            }
+            #botones paper-fab{
+               margin: 10px 5px 10px 5px;
+               --paper-fab-background:var(--app-accent-color);
+            }
+        </style>
+        <div id="wrapper">
+            <iron-image  id="portada" sizing="contain" alt="Portada" src="{{playimg}}"></iron-image>
+            <div id="botones">    
+                <paper-fab mini icon="icons:file-download" title="Descarga"></paper-fab>
+            </div>
+            <paper-audio-player id="audioplayer" src="{{playsrc}}" title="{{playtitle}}" ></paper-audio-player>
+        </div>
+            
+    </template>
+    <script>
+        Polymer({
+            is: 'sr-audio-play',
+            properties:{
+                playsrc: {
+                    type: String
+                },
+                playurl: {
+                    type: String
+                },
+                playtitle: {
+                    type: String
+                },
+                playimg: {
+                    type: String
+                }
+            },
+            reproducir: function(){
+               var audioplayer = this.$.audioplayer;
+               audioplayer._onPlaying();
+            }
+        });
+    </script>
+</dom-module>
